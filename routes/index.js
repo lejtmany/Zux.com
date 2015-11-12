@@ -22,4 +22,8 @@ router.get('/contact', function(req,res,next){
   res.render('contact');
 });
 
+router.get('/opportunities', function(req, res, next) {
+    res.render('opportunities');
+});
+
 module.exports = router;

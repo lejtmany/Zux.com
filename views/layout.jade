@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    link(rel='stylesheet', href='../bower_components/bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet', href='stylesheets/style.css')    
+    meta( name='viewport', content='width=device-width, initial-scale=1.0' )
+    title= title
+  body
+    nav.navbar.navbar-default.navbar-fixed-top
+      .container
+        .navbar-header
+          a.navbar-brand Zux
+        .navbar-collapse.collapse
+          ul.nav.navbar-nav
+            li 
+              a(href='/about') About
+            li 
+              a(href='/donate') Donate
+            li 
+              a(href='/community') Community
+            li
+              a(href='/opportunities')  Opportunities
+            li 
+              a(href='/contact') Contact     
+    block content
+    script(src='../bower_components/jquery/dist/jquery.min.js')
+    script(src='../bower_components/bootstrap/dist/js/bootstrap.min.js')

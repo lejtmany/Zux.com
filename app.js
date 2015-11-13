@@ -7,6 +7,9 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var mongo = require('mongodb');
+var monk = require('monk');
+var db = monk('localhost:27017/zux-resumes');
 
 var app = express();
 
@@ -22,6 +25,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static('public'));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
+
+// Make our db accessible to our router
+app.use(function(req,res,next){
+    req.db = db;
+    next();
+});
 
 app.use('/', routes);
 app.use('/users', users);

@@ -26,4 +26,31 @@ router.get('/opportunities', function(req, res, next) {
     res.render('opportunities');
 });
 
+router.get('/applicants', function(req, res, next) {
+    var applicants = req.db.get('resumes');
+    applicants.find({},{}, function(e, docs){
+      res.render('applicants', {'applicants':docs});
+    });
+});
+
+router.post('/addApplicant', function(req,res,next){
+    var db = req.db;
+    
+    var firstName = req.body.FirstName;
+    var lastName = req.body.LastName;
+    var age = req.body.Age;
+    var resumes = db.get('resumes');
+    resumes.insert({'FirstName':firstName,
+                    'LastName':lastName, 
+                    'Age':age}, function (err, doc) {
+        if (err) {
+            // If it failed, return error
+            res.send("There was a problem adding the information to the database.");
+        }
+        else {
+            // And forward to success page
+            res.redirect("applicants");
+        }});
+});
+
 module.exports = router;

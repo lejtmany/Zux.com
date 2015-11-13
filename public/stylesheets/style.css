@@ -10,3 +10,12 @@ a {
 body { 
     padding-top: 50px; 
 }
+
+.affix {
+      top: 0;
+      width: 100%;
+  }
+
+.affix + .container-fluid {
+      padding-top: 100px;
+  }

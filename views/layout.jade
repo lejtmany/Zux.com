@@ -3,26 +3,43 @@ html
   head
     link(rel='stylesheet', href='../bower_components/bootstrap/dist/css/bootstrap.min.css')
     link(rel='stylesheet', href='../bower_components/flat-ui/dist/css/flat-ui.min.css')
+    link(rel='stylesheet', href='../bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css')   
+    link(rel='stylesheet', href='../bower_components/jquery-ui/themes/base/jquery-ui.min.css')       
     link(rel='stylesheet', href='stylesheets/style.css')    
     meta( name='viewport', content='width=device-width, initial-scale=1.0' )
     title= title
   body
-    nav.navbar.navbar-default.navbar-fixed-top
-      .container
-        .navbar-header
-          a.navbar-brand(href='/') Zux
-        .navbar-collapse.collapse
-          ul.nav.navbar-nav.nav-pills
-            li 
-              a(href='/about') About
-            li 
-              a(href='/donate') Donate
-            li 
-              a(href='/community') Community
-            li
-              a(href='/opportunities')  Opportunities
-            li 
-              a(href='/contact') Contact     
+    nav.navbar.navbar-inverse.navbar-fixed-top
+      .navbar-header
+        a.navbar-brand(href='/')
+          img(src="/zux-logo.png" style="max-width:100px; margin-top: -10px;")
+      .navbar-collapse.collapse
+        ul.nav.navbar-nav.nav-pills
+          li 
+            a(href='/about') About
+          li 
+            a(href='/donate') Donate
+          li 
+            a(href='/community') Community
+          li
+            a(href='/opportunities')  Opportunities
+          li 
+            a(href='/contact') Contact     
     block content
     script(src='../bower_components/jquery/dist/jquery.min.js')
     script(src='../bower_components/bootstrap/dist/js/bootstrap.min.js')
+    script(src='../bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js')
+    script(src='../bower_components/flat-ui/dist/js/flat-ui.min.js')    
+    script(src='../bower_components/jquery-ui/jquery-ui.min.js') 
+    script(type="javascript").
+      $(document).ready(
+      function(){
+          $("#slider").slider();
+        }
+        );      
+    
+      		  
+
+    
+
+    

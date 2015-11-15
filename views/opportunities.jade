@@ -4,7 +4,7 @@ block content
 		h1 Opportunities
 	p 
 		|Join Zux in making the world a better place. Tell us a little about yourself and submit your resume.
-	form(method="POST" action='/addApplicant')
+	form(method="POST" action='/applicants')
 		.form-group
 			label First Name
 			input.form-control(type="text", name="FirstName")
@@ -14,6 +14,20 @@ block content
 		.form-group
 			label Age
 			input.form-control(type="text", name="Age")
+		.form-group
+			label Tell us About your personality
+			#slider 
+				
 		.form-group 
-			input.btn.btn-default.btn-file(type="file" name="resume")			
+			label Upload Resume
+			.fileinput.fileinput-new.input-group(data-provides='fileinput')
+				.form-control(data-trigger='fileinput')
+					i.glyphicon.glyphicon-file.fileinput-exists
+					span.fileinput-filename
+				span.input-group-addon.btn.btn-default.btn-file
+					span.fileinput-new Select File
+					span.fileinput-exists Change
+					input(type='file', name='...')
+				a.input-group-addon.btn.btn-default.fileinput-exists(href='#', data-dismiss='fileinput') Remove			
 		button.btn.btn-default(type="submit") Submit
+		

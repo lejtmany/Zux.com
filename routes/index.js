@@ -26,14 +26,14 @@ router.get('/opportunities', function(req, res, next) {
     res.render('opportunities');
 });
 
-router.get('/applicants', function(req, res, next) {
-    var applicants = req.db.get('resumes');
-    applicants.find({},{}, function(e, docs){
-      res.render('applicants', {'applicants':docs});
-    });
-});
+// router.get('/applicants', function(req, res, next) {
+//     var applicants = req.db.get('resumes');
+//     applicants.find({},{}, function(e, docs){
+//       res.render('applicants', {'applicants':docs});
+//     });
+// });
 
-router.post('/addApplicant', function(req,res,next){
+router.post('/applicant', function(req,res,next){
     var db = req.db;
     
     var firstName = req.body.FirstName;

@@ -33,7 +33,7 @@ router.get('/opportunities', function(req, res, next) {
 //     });
 // });
 
-router.post('/applicant', function(req,res,next){
+router.post('/applicant' ,function(req,res,next){
     var db = req.db;
     
     var firstName = req.body.FirstName;
@@ -42,7 +42,8 @@ router.post('/applicant', function(req,res,next){
     var resumes = db.get('resumes');
     resumes.insert({'FirstName':firstName,
                     'LastName':lastName, 
-                    'Age':age}, function (err, doc) {
+                    'Age':age,
+                    'Resume':{'fileType':req.file.mimetype,'filePath':req.file.path }}, function (err, doc) {
         if (err) {
             // If it failed, return error
             res.send("There was a problem adding the information to the database.");

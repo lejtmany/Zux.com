@@ -4,13 +4,12 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var fs = require('fs');
 var routes = require('./routes/index');
 var applicants = require('./routes/applicants');
 var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk('localhost:27017/zux-resumes');
-
 var app = express();
 
 // view engine setup
@@ -41,6 +40,7 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+
 
 // error handlers
 

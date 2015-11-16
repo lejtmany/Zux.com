@@ -4,7 +4,7 @@ block content
 		h1 Opportunities
 	p 
 		|Join Zux in making the world a better place. Tell us a little about yourself and submit your resume.
-	form(method="POST" action='/applicants')
+	form(method="POST" action='/applicants', enctype="multipart/form-data")
 		.form-group
 			label First Name
 			input.form-control(type="text", name="FirstName")
@@ -27,7 +27,7 @@ block content
 				span.input-group-addon.btn.btn-default.btn-file
 					span.fileinput-new Select File
 					span.fileinput-exists Change
-					input(type='file', name='...')
+					input(type='file', name='Resume')
 				a.input-group-addon.btn.btn-default.fileinput-exists(href='#', data-dismiss='fileinput') Remove			
 		button.btn.btn-default(type="submit") Submit
 		

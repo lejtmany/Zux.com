@@ -5,12 +5,16 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var fs = require('fs');
-var routes = require('./routes/index');
-var applicants = require('./routes/applicants');
 var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk('localhost:27017/zux-resumes');
+var passport = require('passport');
+var session = require('express-session');
 var app = express();
+require('./config/passport')(passport);
+var routes = require('./routes/index');
+var applicants = require('./routes/applicants');
+var login = require('./routes/login')(passport);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,6 +27,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static('public'));
+app.use(session({secret:'big secret stuff',
+                 saveUninitialized: true,
+                 resave: true}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
 // Make our db accessible to our router
@@ -33,6 +42,7 @@ app.use(function(req,res,next){
 
 app.use('/', routes);
 app.use('/applicants', applicants);
+app.use('/login', login);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

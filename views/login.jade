@@ -1,0 +1,12 @@
+extends layout
+block content 
+	.page-header
+		h1 Log In
+	form(method="POST" action='/login/login')
+		.form-group
+			label User Name
+			input.form-control(type="text", name="username")
+		.form-group
+			label Password
+			input.form-control(type="Password", name="password")
+		button.btn.btn-default(type="submit") Sign Up

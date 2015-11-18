@@ -1,12 +1,12 @@
-var bcrypt = require('bcrypt');
+var bcryptjs = require('bcryptjs');
 
 module.exports = {
 	generateHash: function (password) {
-		return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+		return bcryptjs.hashSync(password, bcryptjs.genSaltSync(8), null);
 	},
 
 	isValidPassword: function (enteredPassword, storedPassword) {
-		return bcrypt.compareSync(enteredPassword, storedPassword);
+		return bcryptjs.compareSync(enteredPassword, storedPassword);
 	}
 };
 

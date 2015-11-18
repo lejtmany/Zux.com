@@ -28,6 +28,11 @@ module.exports = function (passport) {
 	router.get('/fail', function(req,res,next){
 		res.render('fail');
 	});
+	
+	router.get('/logout', function(req, res, next){
+		req.logOut();
+		res.redirect('/')
+	})
 
 	return router;
 };

@@ -33,9 +33,9 @@ module.exports = function (passport) {
 };
 
 function isLoggedIn(req, res, next){
+	console.log('isAuthenticated? : ' + req.isAuthenticated());
 	if(req.isAuthenticated())
 		return next();
-	
 	res.redirect('signup');
 }
 

@@ -1,11 +1,13 @@
 var LocalStrategy = require('passport-local').Strategy;
 var monk = require('monk');
-var db = monk('localhost:27017/zux-resumes');
+var local_vars = require('../local_vars');
+var db = monk(local_vars.dbConnection);
 var loginFuncs = require('../public/javascripts/loginFuncs');
 module.exports = function (passport) {
 
 	passport.serializeUser(function (user, done) {
-		done(null, user);
+		console.log('user ID: ' + JSON.stringify(user));
+		done(null, user.userName);
 	});
 
 	passport.deserializeUser(function (id, done) {
@@ -32,6 +34,7 @@ module.exports = function (passport) {
 						users.insert({ userName: username, password: loginFuncs.generateHash(password) }, function (err, newUser) {
 							if (err)
 								throw err;
+							console.log('success insert new user');
 							return done(null, newUser);
 						});
 					}
@@ -44,7 +47,7 @@ module.exports = function (passport) {
 
 	passport.use('local-login', new LocalStrategy(
 		{
-			usernameField: 'userName',
+			usernameField: 'username',
 			passwordField: 'password',
 			passReqToCallback: true
 		},
@@ -55,10 +58,11 @@ module.exports = function (passport) {
 					done(err);
 				if(!user)
 					return done(null, false);
-				if(loginFuncs.isValidPassword(password, user.password))
-					return done(null, false);
-				
-				return done(null, user);
+				if(loginFuncs.isValidPassword(password, user.password)){
+					console.log('success: good password!');
+					return done(null, user);
+				}
+					
 			});
 		}
 

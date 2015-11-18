@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var localVars = require('./local_vars');
 var mongo = require('mongodb');
 var monk = require('monk');
-var db = monk('mongodb://' + localVars.dbUserName + ':' + localVars.dbPassword+ '@ds033153.mongolab.com:33153/test-zux');
+var db = monk(localVars.dbConnection);
 var passport = require('passport');
 var session = require('express-session');
 var app = express();
@@ -15,7 +15,6 @@ require('./config/passport')(passport);
 var routes = require('./routes/index');
 var applicants = require('./routes/applicants');
 var login = require('./routes/login')(passport);
-var prompt = require('prompt');
 
 
 // view engine setup
@@ -26,19 +25,25 @@ app.set('view engine', 'jade');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static('public'));
+app.use('/bower_components',  express.static(__dirname + '/bower_components'));
+
+//set up sessions
 app.use(session({secret:'big secret stuff',
-                 saveUninitialized: true,
-                 resave: true}));
+                 duration: 5 * 60 *1000}));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
 // Make our db accessible to our router
 app.use(function(req,res,next){
     req.db = db;
+    next();
+});
+
+app.use(function(req,res,next){
+    res.header('Access-Control-Allow-Credentials', "true");
     next();
 });
 

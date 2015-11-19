@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var path = require('path');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -52,6 +53,11 @@ router.post('/applicant' ,function(req,res,next){
             // And forward to success page
             res.redirect("applicants");
         }});
+});
+
+router.get('/manage', function(req,res, next){
+  var appPath = path.resolve('public/angular-app/app/index.html');
+  res.sendfile(appPath);
 });
 
 module.exports = router;
